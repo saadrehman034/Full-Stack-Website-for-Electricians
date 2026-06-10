@@ -1,0 +1,269 @@
+@import "tailwindcss";
+
+/* ─── Design tokens ───────────────────────────────────────────── */
+:root {
+  /* Blacks / darks */
+  --c-black:   0   0   0;
+  --c-void:    10  11  10;
+  --c-pitch:   15  17  15;
+  --c-coal:    19  20  13;
+  --c-onyx:    22  25  22;
+  --c-graphite:31  35  31;
+  --c-iron:    42  46  41;
+
+  /* Brand greens */
+  --c-volt:    46  204 113;   /* #2ECC71 — primary accent */
+  --c-cta:     39  174 96;    /* #27AE60 — darker CTA */
+  --c-grass:   29  128 71;
+  --c-sage:    88  148 112;
+  --c-olive:   55  110 78;
+  --c-moss:    40  70  50;
+  --c-fern:    39  87  55;
+
+  /* Whites / creams */
+  --c-pure:    255 255 255;
+  --c-bone:    236 239 232;
+  --c-linen:   230 248 238;
+  --c-cream:   210 245 228;
+  --c-citron:  180 245 210;
+  --c-ash:     156 160 152;
+  --c-smoke:   91  95  88;
+
+  /* Bevel / glint */
+  --c-bevel-dark:  20  28  22;
+  --c-bevel-edge:  60  130  80;
+  --c-glint:       180 245 210;
+
+  /* Gradients */
+  --grad-volt-glow: radial-gradient(circle, rgb(var(--c-volt)/0.18) 0%, rgb(var(--c-volt)/0.10) 35%, transparent 72%);
+  --grad-stat: linear-gradient(180deg, #1e3028, #182820 30%, #111f19 62%, #0c1812 82%, #081008 88%, #040a06);
+  --grad-stat-border: linear-gradient(180deg, rgb(var(--c-volt)/0.6), rgb(var(--c-volt)/0.1) 60%, transparent);
+  --grad-btn-primary: linear-gradient(135deg, rgb(var(--c-volt)) 0%, rgb(var(--c-cta)) 100%);
+  --grad-card: linear-gradient(180deg, #0f1f16, #0a140e);
+  --grad-card-active: radial-gradient(120% 85% at 50% 0%, rgb(var(--c-volt)/0.12), transparent 60%), rgb(var(--c-moss)/1);
+  --grad-exp: radial-gradient(120% 75% at 50% -8%, rgb(var(--c-sage)/0.18) 0%, transparent 58%), linear-gradient(178deg, rgba(16,28,20,0.95) 0%, #0a1410 34%, #060e0a 64%, #030806 100%);
+  --grad-quote: radial-gradient(110% 90% at 100% 0%, rgb(var(--c-volt)/0.12) 0%, transparent 52%), radial-gradient(90% 70% at 0% 100%, rgb(var(--c-olive)/0.18) 0%, transparent 55%), linear-gradient(158deg, rgba(16,28,20,0.97) 0%, rgba(8,16,10,0.99) 55%, #030806 100%);
+  --grad-hero-overlay: linear-gradient(135deg, #030806 0%, #060f0a 50%, #0a1a10 100%);
+}
+
+/* ─── Tailwind v4 theme extensions ───────────────────────────── */
+@theme inline {
+  --font-display: var(--font-display), system-ui, sans-serif;
+  --font-mono:    var(--font-mono), ui-monospace, monospace;
+
+  --color-void:     rgb(var(--c-void));
+  --color-pitch:    rgb(var(--c-pitch));
+  --color-coal:     rgb(var(--c-coal));
+  --color-onyx:     rgb(var(--c-onyx));
+  --color-graphite: rgb(var(--c-graphite));
+  --color-iron:     rgb(var(--c-iron));
+  --color-volt:     rgb(var(--c-volt));
+  --color-cta:      rgb(var(--c-cta));
+  --color-grass:    rgb(var(--c-grass));
+  --color-sage:     rgb(var(--c-sage));
+  --color-olive:    rgb(var(--c-olive));
+  --color-fern:     rgb(var(--c-fern));
+  --color-bone:     rgb(var(--c-bone));
+  --color-cream:    rgb(var(--c-cream));
+  --color-citron:   rgb(var(--c-citron));
+  --color-ash:      rgb(var(--c-ash));
+  --color-smoke:    rgb(var(--c-smoke));
+  --color-pure:     rgb(var(--c-pure));
+}
+
+/* ─── Base ────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: rgb(var(--c-void));
+  color: rgb(var(--c-bone));
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--c-volt));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: rgb(var(--c-void)); }
+::-webkit-scrollbar-thumb { background: rgb(var(--c-volt)/0.6); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgb(var(--c-volt)); }
+
+/* ─── Typography helpers ──────────────────────────────────────── */
+.text-display {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+.font-mono { font-family: var(--font-mono); }
+
+/* ─── Section helpers ─────────────────────────────────────────── */
+.section        { background: rgb(0 0 0); padding: 5rem 1.5rem; }
+.section-container { margin: 0 auto; width: 100%; max-width: 1200px; }
+
+/* ─── Keyframes ───────────────────────────────────────────────── */
+@keyframes heroRise {
+  0%   { opacity: 0; transform: translateY(48px); filter: blur(8px); }
+  100% { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+@keyframes heroGlowBreathe {
+  0%, 100% { opacity: 0.7;  transform: translate(-50%, -50%) scale(1);    }
+  50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.08); }
+}
+@keyframes chipEnter {
+  0%   { opacity: 0; transform: translateY(34px) scale(0.6); filter: blur(8px); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0) scale(1);      filter: blur(0); }
+}
+@keyframes chipFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes heartbeat {
+  0%, 60%, 100% { transform: scale(1); }
+  12%            { transform: scale(1.2); }
+  24%            { transform: scale(1); }
+  36%            { transform: scale(1.14); }
+  48%            { transform: scale(1); }
+}
+@keyframes btnSheen {
+  0%   { transform: translateX(-130%) skewX(-18deg); }
+  100% { transform: translateX(230%)  skewX(-18deg); }
+}
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes testimonialGlow {
+  0%, 100% { opacity: 0.65; }
+  50%       { opacity: 1; }
+}
+@keyframes pulseRing {
+  0%   { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+@keyframes counterUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+/* ─── Animation utility classes ──────────────────────────────── */
+.hero-rise      { animation: heroRise 1s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+.hero-glow      { animation: heroGlowBreathe 7s ease-in-out infinite; will-change: transform, opacity; }
+.chip-enter     { animation: chipEnter 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) backwards; }
+.chip-float     { animation: chipFloat 5s ease-in-out infinite; will-change: transform; }
+.heartbeat      { animation: heartbeat 1.8s ease-in-out infinite; transform-origin: center; will-change: transform; }
+.marquee-track  { animation: marquee 28s linear infinite; }
+.testimonial-glow-pulse { animation: testimonialGlow 7s ease-in-out infinite; will-change: opacity; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise, .hero-glow, .chip-enter, .chip-float, .heartbeat,
+  .marquee-track, .testimonial-glow-pulse, .btn-sheen::after { animation: none !important; }
+}
+
+/* ─── Button sheen ────────────────────────────────────────────── */
+.btn-sheen {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 45%;
+  background: linear-gradient(100deg, transparent, rgb(var(--c-pure)/0.45), transparent);
+  transform: translateX(-130%) skewX(-18deg);
+  pointer-events: none;
+}
+.btn-sheen:hover::after {
+  animation: btnSheen 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ─── Stat card (gradient border trick) ──────────────────────── */
+.stat-card {
+  background: var(--grad-stat) padding-box,
+              var(--grad-stat-border) border-box;
+  border: 1px solid transparent;
+  border-radius: 22px;
+}
+
+/* ─── Card surfaces ───────────────────────────────────────────── */
+.card-surface        { background: var(--grad-card); }
+.card-surface-active { background: var(--grad-card-active); }
+.exp-card            { background: var(--grad-exp); }
+.quote-card          {
+  background: var(--grad-quote);
+  box-shadow: 0 28px 70px -20px rgb(var(--c-black)/0.75),
+              0 0 0 1px rgb(var(--c-pure)/0.06),
+              inset 0 1px 0 rgb(var(--c-cream)/0.10),
+              inset 0 0 40px rgb(var(--c-volt)/0.03);
+}
+
+/* ─── Chip card hover ─────────────────────────────────────────── */
+.chip-card {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s ease;
+}
+.chip-card:hover {
+  transform: scale(1.06) translateY(-4px);
+  box-shadow: 0 14px 40px -8px rgb(var(--c-volt)/0.35);
+}
+
+/* ─── Volt glow blob ──────────────────────────────────────────── */
+.volt-glow {
+  background: var(--grad-volt-glow);
+  pointer-events: none;
+}
+
+/* ─── Glow shadows ────────────────────────────────────────────── */
+.shadow-glow     { box-shadow: 0 0 48px rgb(var(--c-volt)/0.35); }
+.shadow-glow-sm  { box-shadow: 0 0 24px rgb(var(--c-volt)/0.25); }
+.shadow-glow-dot { box-shadow: 0 0 12px rgb(var(--c-volt)/0.55); }
+.shadow-soft     { box-shadow: 0 24px 60px rgb(0 0 0/0.5); }
+
+/* ─── Gradient text ───────────────────────────────────────────── */
+.text-gradient-volt {
+  background: linear-gradient(135deg, rgb(var(--c-volt)) 0%, rgb(var(--c-citron)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Animated gradient border ───────────────────────────────── */
+.border-glow-volt {
+  position: relative;
+}
+.border-glow-volt::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgb(var(--c-volt)/0.6), transparent 50%, rgb(var(--c-volt)/0.2));
+  z-index: -1;
+}
+
+/* ─── Pulse ring for live indicator ──────────────────────────── */
+.pulse-ring::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  background: rgb(var(--c-volt)/0.3);
+  animation: pulseRing 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

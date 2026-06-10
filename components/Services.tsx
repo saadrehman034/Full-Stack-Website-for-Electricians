@@ -1,0 +1,268 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import Image from "next/image";
+
+/*
+  The three electrician images the user provided.
+  If you save them to /public/, replace these URLs with:
+    /electrician-1.jpg, /electrician-2.jpg, /electrician-3.jpg
+
+  Using matching Unsplash electrician photos (electrical panel, hard hat)
+  that closely match the images shared.
+*/
+const team = [
+  {
+    name: "Marcus Reid",
+    role: "Senior Electrician",
+    label: "Electrical Work",
+    img: "/electrician-1.webp",
+    desc: "Focused, precise, expert-level. Marcus handles complex panel installations and fault diagnosis with 12+ years of hands-on experience.",
+  },
+  {
+    name: "Jake Torres",
+    role: "Installation Expert",
+    label: "Installations",
+    img: "/electrician-2.webp",
+    desc: "Smiling through every job — Jake brings energy and precision to full electrical fit-outs, panel upgrades, and rewiring projects.",
+  },
+  {
+    name: "Ryan Cole",
+    role: "Maintenance Specialist",
+    label: "Maintenance",
+    img: "/electrician-3.webp",
+    desc: "Certified and meticulous, Ryan specialises in preventive maintenance, safety inspections, and residential system overhauls.",
+  },
+];
+
+const cardVariants = {
+  hidden:  { opacity: 0, y: 48 },
+  visible: (i: number) => ({
+    opacity: 1, y: 0,
+    transition: { delay: i * 0.14, duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
+  }),
+};
+
+export default function Services() {
+  const hRef    = useRef(null);
+  const hInView = useInView(hRef, { once: true, margin: "-80px" });
+
+  return (
+    <section
+      id="services"
+      className="relative overflow-hidden py-24 md:py-32"
+      style={{ background: "linear-gradient(160deg, #111008 0%, #16130a 45%, #0e0d0a 100%)" }}
+      aria-label="Services"
+    >
+      {/* ── Subtle dot pattern ── */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.06]"
+        style={{
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* ── Top edge fade from hero ── */}
+      <div
+        className="absolute top-0 left-0 right-0 h-32 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.5), transparent)" }}
+        aria-hidden="true"
+      />
+
+      {/* ── Red accent blob — top right ── */}
+      <div
+        className="absolute top-0 right-0 w-[600px] h-[500px] pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse at 100% 0%, rgba(229,57,53,0.10) 0%, transparent 65%)",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* ── Warm amber glow — bottom left ── */}
+      <div
+        className="absolute bottom-0 left-0 w-[500px] h-[400px] pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse at 0% 100%, rgba(180,130,40,0.07) 0%, transparent 60%)",
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="container-main relative z-10">
+
+        {/* ── Section header ── */}
+        <motion.div
+          ref={hRef}
+          initial={{ opacity: 0, y: 30 }}
+          animate={hInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.65 }}
+          className="text-center mb-16 lg:mb-20"
+        >
+          <span className="section-label justify-center mb-4">Meet The Team</span>
+          <h2
+            className="text-display font-bold text-white mt-4"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.4rem)" }}
+          >
+            Expert Electricians,
+            <br />
+            <span style={{ color: "rgb(var(--red))" }}>Ready to Help</span>
+          </h2>
+          <p className="text-white/45 text-sm mt-5 max-w-lg mx-auto leading-relaxed">
+            Our certified team brings the right skills, tools, and attitude to every job.
+            90-day warranty on all work. Most jobs completed same day.
+          </p>
+
+          {/* Trust pills */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
+            {["Certified & Insured", "Same-Day Available", "90-Day Warranty", "Upfront Pricing"].map((t) => (
+              <span
+                key={t}
+                className="text-[11px] font-semibold uppercase tracking-[0.12em] px-4 py-2 rounded-sm border"
+                style={{ color: "rgb(var(--red))", borderColor: "rgba(229,57,53,0.3)", background: "rgba(229,57,53,0.08)" }}
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* ── 3-column card grid ── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {team.map((m, i) => (
+            <motion.article
+              key={m.name}
+              custom={i}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+              className="group relative overflow-hidden rounded-sm cursor-pointer"
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                boxShadow: "0 8px 40px rgba(0,0,0,0.4)",
+                backdropFilter: "blur(8px)",
+                transition: "transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease, border-color 0.3s ease",
+              }}
+              whileHover={{
+                y: -10,
+                boxShadow: "0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(229,57,53,0.2)",
+                transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] as const },
+              }}
+              aria-label={`${m.name} — ${m.role}`}
+            >
+              {/* ── Photo with overlay ── */}
+              <div className="relative overflow-hidden" style={{ aspectRatio: "3/4" }}>
+                <Image
+                  src={m.img}
+                  alt={`${m.name}, ${m.role} — electrical technician`}
+                  fill
+                  sizes="(max-width:768px) 100vw, 33vw"
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-108"
+                  style={{ transition: "transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
+                />
+
+                {/* Deep gradient overlay */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: "linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.88) 100%)",
+                  }}
+                  aria-hidden="true"
+                />
+
+                {/* Hover red tint overlay */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ background: "linear-gradient(180deg, rgba(229,57,53,0.08) 0%, rgba(0,0,0,0) 60%)" }}
+                  aria-hidden="true"
+                />
+
+                {/* Service badge — top left */}
+                <span
+                  className="absolute top-4 left-4 text-white text-[10px] font-bold uppercase tracking-[0.16em] px-3 py-1.5 rounded-sm"
+                  style={{ background: "var(--grad-red)", boxShadow: "var(--shadow-red)" }}
+                >
+                  {m.label}
+                </span>
+
+                {/* Availability dot — top right */}
+                <span className="absolute top-4 right-4 flex items-center gap-1.5 bg-black/50 backdrop-blur-sm text-white/80 text-[10px] uppercase tracking-wider font-semibold px-2.5 py-1.5 rounded-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0 animate-pulse" />
+                  Available
+                </span>
+
+                {/* Name + role over image bottom */}
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <p className="font-display text-white font-semibold text-xl uppercase tracking-wide leading-tight">
+                    {m.name}
+                  </p>
+                  <p className="text-white/60 text-[11px] uppercase tracking-[0.14em] mt-1 font-medium">
+                    {m.role}
+                  </p>
+                </div>
+              </div>
+
+              {/* ── Card body ── */}
+              <div className="p-5 border-t border-white/[0.07]">
+                <p className="text-white/45 text-sm leading-relaxed">{m.desc}</p>
+
+                <div className="flex items-center justify-between mt-5 pt-4 border-t border-white/[0.07]">
+                  <a
+                    href="#contact"
+                    onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.12em] transition-all duration-200 group/link"
+                    style={{ color: "rgb(var(--red))" }}
+                    aria-label={`Book ${m.name}`}
+                  >
+                    Book Now
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover/link:translate-x-1 transition-transform duration-200" aria-hidden="true">
+                      <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                  </a>
+
+                  {/* Rating */}
+                  <div className="flex items-center gap-1">
+                    {[1,2,3,4,5].map((s) => (
+                      <svg key={s} width="11" height="11" viewBox="0 0 24 24" fill="rgb(var(--red))" stroke="none" aria-hidden="true">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                      </svg>
+                    ))}
+                    <span className="text-white/35 text-[10px] ml-1">5.0</span>
+                  </div>
+                </div>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+
+        {/* ── Bottom CTA strip ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.65 }}
+          className="mt-16 flex flex-col sm:flex-row items-center justify-between gap-6 pt-10 border-t border-white/[0.08]"
+        >
+          <div>
+            <p className="font-display text-white font-semibold text-lg uppercase tracking-wide">
+              Not sure who you need?
+            </p>
+            <p className="text-white/40 text-sm mt-1">Describe your issue — we&apos;ll match you with the right expert.</p>
+          </div>
+          <button
+            onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+            className="btn-primary flex-shrink-0"
+          >
+            Get Matched
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </button>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
