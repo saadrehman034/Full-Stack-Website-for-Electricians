@@ -11,7 +11,7 @@ const leftStats = [
 ];
 
 const rightBadges = [
-  { icon: "⚡", val: "98%",     sub: "Satisfaction Rate" },
+  { icon: "⚡", val: "98%",      sub: "Satisfaction Rate" },
   { icon: "🔧", val: "Same Day", sub: "Service Available" },
   { icon: "✓",  val: "90-Day",  sub: "Work Guarantee" },
 ];
@@ -39,34 +39,25 @@ export default function Hero() {
       {/* header spacer */}
       <div style={{ height: 68, flexShrink: 0 }} />
 
-      {/* ══ TOP META ROW ══ */}
-      <motion.p
-        initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.5, duration: 0.7, ease: [0.16,1,0.3,1] }}
-        style={{
-          position: "absolute", top: 86, left: "clamp(20px, 4vw, 60px)",
-          margin: 0, zIndex: 50, color: "rgba(255,255,255,0.45)",
-          fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase",
-        }}
-      >
+      {/* ── TOP META (hidden on mobile) ── */}
+      <p className="hero-meta-text" style={{
+        position: "absolute", top: 86, left: "clamp(20px, 4vw, 60px)",
+        margin: 0, zIndex: 50, color: "rgba(255,255,255,0.45)",
+        fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase",
+      }}>
         Certified · Same-Day · 90-Day Guarantee
-      </motion.p>
-
-      <motion.p
-        initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.55, duration: 0.7, ease: [0.16,1,0.3,1] }}
-        style={{
-          position: "absolute", top: 86, right: "clamp(20px, 4vw, 60px)",
-          margin: 0, zIndex: 50, color: "rgba(255,255,255,0.45)",
-          fontSize: 10, fontWeight: 700, letterSpacing: "0.2em",
-          textTransform: "uppercase", textAlign: "right",
-        }}
-      >
+      </p>
+      <p className="hero-meta-text" style={{
+        position: "absolute", top: 86, right: "clamp(20px, 4vw, 60px)",
+        margin: 0, zIndex: 50, color: "rgba(255,255,255,0.45)",
+        fontSize: 10, fontWeight: 700, letterSpacing: "0.2em",
+        textTransform: "uppercase", textAlign: "right",
+      }}>
         Available Nationwide
-      </motion.p>
+      </p>
 
       {/* LEFT GLOW */}
-      <div style={{
+      <div aria-hidden style={{
         position: "absolute", left: 0,
         top: "clamp(80px, 12vh, 140px)",
         width: "clamp(260px, 34vw, 480px)",
@@ -86,7 +77,7 @@ export default function Hero() {
       </div>
 
       {/* RIGHT GLOW */}
-      <div style={{
+      <div aria-hidden style={{
         position: "absolute", right: 0,
         top: "clamp(80px, 12vh, 140px)",
         width: "clamp(260px, 34vw, 480px)",
@@ -106,114 +97,108 @@ export default function Hero() {
       </div>
 
       {/* ══════════════════════════════════
-          LEFT PANEL
+          LEFT PANEL  — plain div hides on mobile, motion.div inside for fx
       ══════════════════════════════════ */}
-      <motion.div
-        initial={{ opacity: 0, x: -32 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.4, duration: 0.85, ease: [0.16,1,0.3,1] }}
-        whileHover={{ filter: "drop-shadow(0 0 32px rgba(255,210,80,0.55)) drop-shadow(0 0 64px rgba(255,180,40,0.25))" }}
-        style={{
-          position: "absolute",
-          left: "clamp(24px, 5vw, 72px)",
-          top: "clamp(110px, 16vh, 170px)",
-          zIndex: 50,
-          display: "flex",
-          flexDirection: "column",
-          gap: 14,
-          maxWidth: 170,
-          cursor: "default",
-        }}
-      >
-        {/* heading */}
-        <div>
-          <p style={{
-            margin: 0, color: "rgba(255,255,255,0.38)",
-            fontSize: 10, fontWeight: 700, letterSpacing: "0.22em",
-            textTransform: "uppercase", marginBottom: 10,
-          }}>
-            #1 Electrical Service
-          </p>
-          <h1 style={{
-            margin: 0,
-            fontFamily: "var(--font-oswald, Oswald), sans-serif",
-            fontWeight: 700, textTransform: "uppercase",
-            fontSize: "clamp(0.95rem, 1.35vw, 1.25rem)",
-            color: "#fff", lineHeight: 1.2, letterSpacing: "0.01em",
-          }}>
-            Expert Care<br />For Every<br />
-            <span style={{ color: "rgba(255,255,255,0.5)" }}>Circuit.</span>
-          </h1>
-        </div>
-
-        {/* stat pills */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-          {leftStats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              initial={{ opacity: 0, x: -18 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 + i * 0.1, duration: 0.65, ease: [0.16,1,0.3,1] }}
-              whileHover={{
-                boxShadow: "0 0 20px rgba(255,210,80,0.45), 0 0 40px rgba(255,180,40,0.18)",
-                borderColor: "rgba(255,210,80,0.35)",
-                transition: { duration: 0.2 },
-              }}
-              style={{
-                display: "flex", alignItems: "center", gap: 10,
-                background: "rgba(255,255,255,0.07)",
-                border: "1px solid rgba(255,255,255,0.12)",
-                borderRadius: 5, padding: "5px 10px",
-                backdropFilter: "blur(6px)",
-                cursor: "default",
-              }}
-            >
-              <span style={{
-                fontFamily: "var(--font-oswald, Oswald), sans-serif",
-                fontWeight: 700, fontSize: "0.9rem", color: "#fff",
-              }}>{s.num}</span>
-              <span style={{ fontSize: 8, color: "rgba(255,255,255,0.5)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-                {s.label}
-              </span>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* CTA button */}
-        <motion.a
-          href="#services"
-          onClick={(e) => { e.preventDefault(); document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" }); }}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.82, duration: 0.6, ease: [0.16,1,0.3,1] }}
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.97 }}
-          style={{
-            display: "inline-flex", alignItems: "center", gap: 8,
-            background: "rgb(229,57,53)", color: "#fff",
-            fontWeight: 700, fontSize: 9, letterSpacing: "0.14em",
-            textTransform: "uppercase", textDecoration: "none",
-            padding: "7px 13px", borderRadius: 4,
-            boxShadow: "0 4px 24px rgba(229,57,53,0.35)",
-            width: "fit-content",
-          }}
+      <div className="hero-side-panel" style={{
+        position: "absolute",
+        left: "clamp(24px, 5vw, 72px)",
+        top: "clamp(110px, 16vh, 170px)",
+        zIndex: 50,
+        flexDirection: "column",
+        gap: 14,
+        maxWidth: 170,
+      }}>
+        <motion.div
+          initial={{ opacity: 0, x: -32 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.4, duration: 0.85, ease: [0.16,1,0.3,1] }}
+          whileHover={{ filter: "drop-shadow(0 0 32px rgba(255,210,80,0.55)) drop-shadow(0 0 64px rgba(255,180,40,0.25))" }}
+          style={{ display: "flex", flexDirection: "column", gap: 14, cursor: "default" }}
         >
-          Book Service
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-          </svg>
-        </motion.a>
-      </motion.div>
+          {/* heading */}
+          <div>
+            <p style={{
+              margin: 0, color: "rgba(255,255,255,0.38)",
+              fontSize: 10, fontWeight: 700, letterSpacing: "0.22em",
+              textTransform: "uppercase", marginBottom: 10,
+            }}>
+              #1 Electrical Service
+            </p>
+            <h1 style={{
+              margin: 0,
+              fontFamily: "var(--font-oswald, Oswald), sans-serif",
+              fontWeight: 700, textTransform: "uppercase",
+              fontSize: "clamp(0.95rem, 1.35vw, 1.25rem)",
+              color: "#fff", lineHeight: 1.2, letterSpacing: "0.01em",
+            }}>
+              Expert Care<br />For Every<br />
+              <span style={{ color: "rgba(255,255,255,0.5)" }}>Circuit.</span>
+            </h1>
+          </div>
+
+          {/* stat pills */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            {leftStats.map((s, i) => (
+              <motion.div
+                key={s.label}
+                initial={{ opacity: 0, x: -18 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6 + i * 0.1, duration: 0.65, ease: [0.16,1,0.3,1] }}
+                whileHover={{
+                  boxShadow: "0 0 20px rgba(255,210,80,0.45), 0 0 40px rgba(255,180,40,0.18)",
+                  borderColor: "rgba(255,210,80,0.35)",
+                  transition: { duration: 0.2 },
+                }}
+                style={{
+                  display: "flex", alignItems: "center", gap: 10,
+                  background: "rgba(255,255,255,0.07)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  borderRadius: 5, padding: "5px 10px",
+                  backdropFilter: "blur(6px)",
+                  cursor: "default",
+                }}
+              >
+                <span style={{ fontFamily: "var(--font-oswald, Oswald), sans-serif", fontWeight: 700, fontSize: "0.9rem", color: "#fff" }}>{s.num}</span>
+                <span style={{ fontSize: 8, color: "rgba(255,255,255,0.5)", letterSpacing: "0.1em", textTransform: "uppercase" }}>{s.label}</span>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <motion.a
+            href="#services"
+            onClick={(e) => { e.preventDefault(); document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" }); }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.82, duration: 0.6, ease: [0.16,1,0.3,1] }}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 8,
+              background: "rgb(229,57,53)", color: "#fff",
+              fontWeight: 700, fontSize: 9, letterSpacing: "0.14em",
+              textTransform: "uppercase", textDecoration: "none",
+              padding: "7px 13px", borderRadius: 4,
+              boxShadow: "0 4px 24px rgba(229,57,53,0.35)",
+              width: "fit-content",
+            }}
+          >
+            Book Service
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </motion.a>
+        </motion.div>
+      </div>
 
       {/* ══════════════════════════════════
-          RIGHT PANEL — floating badge cards
+          RIGHT PANEL — plain div hides on mobile
       ══════════════════════════════════ */}
-      <div style={{
+      <div className="hero-side-panel" style={{
         position: "absolute",
         right: "clamp(24px, 5vw, 72px)",
         top: "clamp(110px, 16vh, 170px)",
         zIndex: 50,
-        display: "flex",
         flexDirection: "column",
         gap: 10,
       }}>
@@ -263,8 +248,8 @@ export default function Hero() {
         bottom: "calc(56px + 18vh)",
         left: "50%",
         transform: "translateX(-50%)",
-        width: "clamp(420px, 62vw, 920px)",
-        height: "clamp(380px, 72vh, 820px)",
+        width: "clamp(260px, 80vw, 920px)",
+        height: "clamp(280px, 72vh, 820px)",
         zIndex: 20,
         maskImage: "linear-gradient(to bottom, black 65%, transparent 100%)",
         WebkitMaskImage: "linear-gradient(to bottom, black 65%, transparent 100%)",
@@ -299,34 +284,113 @@ export default function Hero() {
 
       {/* ══════════════════════════════════
           INSTANT REPAIR  z-30
+          hero-instant-wrap: on-person on mobile, below on desktop
       ══════════════════════════════════ */}
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.95, ease: [0.16,1,0.3,1], delay: 0.05 }}
-        style={{
-          position: "absolute",
-          bottom: "calc(56px + 8vh)",
-          left: 0, right: 0,
-          textAlign: "center",
-          zIndex: 30,
-          pointerEvents: "none", userSelect: "none",
-        }}
-      >
-        <span style={{
-          fontFamily: "var(--font-oswald, Oswald), sans-serif",
-          fontSize: "clamp(4rem, 12.5vw, 16rem)",
-          fontWeight: 700,
-          textTransform: "uppercase",
-          letterSpacing: "-0.01em",
-          color: "#ffffff",
-          whiteSpace: "nowrap",
-          display: "block",
-          lineHeight: 1,
-        }}>
+      <div className="hero-instant-wrap" style={{
+        position: "absolute",
+        bottom: "calc(56px + 8vh)",   /* desktop default — overridden on mobile via CSS */
+        left: 0, right: 0,
+        textAlign: "center",
+        zIndex: 30,
+        pointerEvents: "none", userSelect: "none",
+      }}>
+        <motion.span
+          className="hero-headline"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.95, ease: [0.16,1,0.3,1], delay: 0.05 }}
+          style={{
+            fontFamily: "var(--font-oswald, Oswald), sans-serif",
+            fontWeight: 700,
+            textTransform: "uppercase",
+            letterSpacing: "-0.01em",
+            color: "#ffffff",
+            display: "block",
+            lineHeight: 0.92,
+            textShadow: "0 4px 32px rgba(0,0,0,0.55)",
+          }}
+        >
           INSTANT REPAIR
-        </span>
-      </motion.div>
+        </motion.span>
+      </div>
+
+      {/* ══════════════════════════════════
+          MOBILE-ONLY: stats strip (top) + CTA (bottom)
+      ══════════════════════════════════ */}
+
+      {/* Mid-body stats strip — mobile only */}
+      <div className="hero-mobile-only" style={{
+        position: "absolute",
+        top: "38%",
+        left: 0, right: 0,
+        justifyContent: "center",
+        gap: 8,
+        zIndex: 50,
+        pointerEvents: "none",
+        flexWrap: "wrap",
+        padding: "0 20px",
+      }}>
+        {[
+          { icon: "⚡", text: "Same-Day" },
+          { icon: "✓", text: "90-Day Warranty" },
+          { icon: "★", text: "5k+ Clients" },
+        ].map((b) => (
+          <motion.span
+            key={b.text}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.16,1,0.3,1] }}
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 5,
+              background: "rgba(0,0,0,0.28)",
+              border: "1px solid rgba(255,255,255,0.14)",
+              borderRadius: 9999,
+              padding: "5px 12px",
+              backdropFilter: "blur(10px)",
+              fontSize: 10, fontWeight: 700,
+              color: "rgba(255,255,255,0.85)",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              whiteSpace: "nowrap",
+            }}
+          >
+            <span style={{ color: "#3c6e52" }}>{b.icon}</span>
+            {b.text}
+          </motion.span>
+        ))}
+      </div>
+
+      {/* Book Service CTA — mobile only */}
+      <div className="hero-mobile-only" style={{
+        position: "absolute",
+        bottom: "calc(56px + 9vh)",
+        left: 0, right: 0,
+        justifyContent: "center",
+        zIndex: 35,
+      }}>
+        <motion.a
+          href="#services"
+          onClick={(e) => { e.preventDefault(); document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" }); }}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.5, ease: [0.16,1,0.3,1] }}
+          style={{
+            display: "inline-flex", alignItems: "center", gap: 8,
+            background: "rgb(229,57,53)",
+            color: "#fff",
+            fontWeight: 700, fontSize: 11, letterSpacing: "0.14em",
+            textTransform: "uppercase", textDecoration: "none",
+            padding: "11px 22px", borderRadius: 9999,
+            boxShadow: "0 6px 28px rgba(229,57,53,0.45)",
+            minHeight: 44,
+          }}
+        >
+          Book Service
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </motion.a>
+      </div>
 
       {/* scroll indicator */}
       <motion.div
@@ -362,7 +426,7 @@ export default function Hero() {
         zIndex: 25, pointerEvents: "none",
       }} />
 
-      {/* ══ WHITE BRAND TICKER ══ */}
+      {/* ── WHITE BRAND TICKER ── */}
       <motion.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.6 }}

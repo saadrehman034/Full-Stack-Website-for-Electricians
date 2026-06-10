@@ -17,21 +17,24 @@ const team = [
     name: "Marcus Reid",
     role: "Senior Electrician",
     label: "Electrical Work",
-    img: "/electrician-1.webp",
+    img: "/3.jpg",
+    imgPosition: "top right",
     desc: "Focused, precise, expert-level. Marcus handles complex panel installations and fault diagnosis with 12+ years of hands-on experience.",
   },
   {
     name: "Jake Torres",
     role: "Installation Expert",
     label: "Installations",
-    img: "/electrician-2.webp",
+    img: "/4.jpg",
+    imgPosition: "top center",
     desc: "Smiling through every job — Jake brings energy and precision to full electrical fit-outs, panel upgrades, and rewiring projects.",
   },
   {
     name: "Ryan Cole",
     role: "Maintenance Specialist",
     label: "Maintenance",
-    img: "/electrician-3.webp",
+    img: "/5.jpg",
+    imgPosition: "top left",
     desc: "Certified and meticulous, Ryan specialises in preventive maintenance, safety inspections, and residential system overhauls.",
   },
 ];
@@ -129,7 +132,7 @@ export default function Services() {
         </motion.div>
 
         {/* ── 3-column card grid ── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="mobile-scroll-row lg:gap-8">
           {team.map((m, i) => (
             <motion.article
               key={m.name}
@@ -160,8 +163,8 @@ export default function Services() {
                   alt={`${m.name}, ${m.role} — electrical technician`}
                   fill
                   sizes="(max-width:768px) 100vw, 33vw"
-                  className="object-cover object-center transition-transform duration-700 group-hover:scale-108"
-                  style={{ transition: "transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
+                  className="object-cover transition-transform duration-700 group-hover:scale-108"
+                  style={{ objectPosition: m.imgPosition, transition: "transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
                 />
 
                 {/* Deep gradient overlay */}
