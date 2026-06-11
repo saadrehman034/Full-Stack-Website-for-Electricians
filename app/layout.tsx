@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
-import { Oswald, Inter } from "next/font/google";
+import { Anton, Oswald, Inter } from "next/font/google";
 import "./globals.css";
+
+const anton = Anton({
+  subsets: ["latin"],
+  variable: "--font-anton",
+  weight: ["400"],
+  display: "swap",
+});
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -55,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${oswald.variable} ${inter.variable} scroll-smooth`}>
+    <html lang="en" className={`${anton.variable} ${oswald.variable} ${inter.variable} scroll-smooth`}>
       <body className="bg-white text-[#1c1c1c] antialiased">
         {children}
       </body>

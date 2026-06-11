@@ -243,16 +243,16 @@ export default function Hero() {
       {/* ══════════════════════════════════
           PERSON  z-20
       ══════════════════════════════════ */}
-      <div style={{
+      <div className="hero-person-wrap" style={{
         position: "absolute",
         bottom: "calc(56px + 18vh)",
         left: "50%",
         transform: "translateX(-50%)",
-        width: "clamp(260px, 80vw, 920px)",
+        width: "clamp(260px, 100vw, 920px)",
         height: "clamp(280px, 72vh, 820px)",
         zIndex: 20,
-        maskImage: "linear-gradient(to bottom, black 65%, transparent 100%)",
-        WebkitMaskImage: "linear-gradient(to bottom, black 65%, transparent 100%)",
+        maskImage: "linear-gradient(to bottom, black 88%, transparent 100%)",
+        WebkitMaskImage: "linear-gradient(to bottom, black 88%, transparent 100%)",
       }}>
         <motion.div
           initial={{ opacity: 0, y: 55 }}
@@ -263,18 +263,17 @@ export default function Hero() {
           <motion.div
             animate={{ y: [0, -10, 0] }}
             transition={{ delay: 2.2, duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-            style={{ width: "100%", height: "100%" }}
+            style={{ position: "relative", width: "100%", height: "100%" }}
           >
             <Image
               src="/2.png"
               alt="Professional electrician"
-              width={2500}
-              height={2160}
+              fill
               priority
+              className="hero-person-img"
               style={{
-                width: "100%", height: "100%", display: "block",
-                objectFit: "cover", objectPosition: "top center",
-                transform: "scaleX(1.12)",
+                objectFit: "cover",
+                objectPosition: "top center",
                 filter: "drop-shadow(0 20px 60px rgba(0,0,0,0.5))",
               }}
             />
@@ -288,30 +287,20 @@ export default function Hero() {
       ══════════════════════════════════ */}
       <div className="hero-instant-wrap" style={{
         position: "absolute",
-        bottom: "calc(56px + 8vh)",   /* desktop default — overridden on mobile via CSS */
+        bottom: "calc(56px + 7vh)",
         left: 0, right: 0,
-        textAlign: "center",
-        zIndex: 30,
+        zIndex: 32,
         pointerEvents: "none", userSelect: "none",
       }}>
-        <motion.span
-          className="hero-headline"
-          initial={{ opacity: 0, y: 24 }}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.95, ease: [0.16,1,0.3,1], delay: 0.05 }}
-          style={{
-            fontFamily: "var(--font-oswald, Oswald), sans-serif",
-            fontWeight: 700,
-            textTransform: "uppercase",
-            letterSpacing: "-0.01em",
-            color: "#ffffff",
-            display: "block",
-            lineHeight: 0.92,
-            textShadow: "0 4px 32px rgba(0,0,0,0.55)",
-          }}
         >
-          INSTANT REPAIR
-        </motion.span>
+          <span className="hero-headline" aria-hidden="true">
+            INSTANT&nbsp;REPAIR
+          </span>
+        </motion.div>
       </div>
 
       {/* ══════════════════════════════════
